@@ -1,0 +1,26 @@
+{
+  "name": "polygraphic-demo",
+  "version": "1.0.0",
+  "description": "Learn Polygraphic through examples",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "polygraphic-web pwa src/todo/index.ts -o dist/todo",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nagolyhprum/polygraphic-demo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nagolyhprum/polygraphic-demo/issues"
+  },
+  "homepage": "https://github.com/nagolyhprum/polygraphic-demo#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "polygraphic": "^0.41.0",
+    "polygraphic-web": "^0.1.4"
+  }
+}
