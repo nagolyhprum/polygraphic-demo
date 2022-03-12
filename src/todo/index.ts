@@ -810,7 +810,10 @@ const App = stack<TodoState, TodoState>(MATCH, MATCH, [
 		background_color : "red",
 		description : "An app to help you get stuff done",
 		display : "standalone",
-		icons : CheckWhite,
+		icons : {
+			src : CheckWhite,
+			percent : 1
+		},
 		name : "Todo",
 		short_name : "Todo",
 		start_url : "/todo/",
