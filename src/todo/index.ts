@@ -807,7 +807,7 @@ const TaskScreen = screen<TodoState>(column(MATCH, MATCH, [
 
 const App = stack<TodoState, TodoState>(MATCH, MATCH, [
 	manifest({
-		background_color : "red",
+		background_color : PRIMARY,
 		description : "An app to help you get stuff done",
 		display : "standalone",
 		icons : {
@@ -817,7 +817,7 @@ const App = stack<TodoState, TodoState>(MATCH, MATCH, [
 		name : "Todo",
 		short_name : "Todo",
 		start_url : "/todo/",
-		theme_color : "blue"
+		theme_color : PRIMARY
 	}),
 	clip(true),
 	funcs(Todo),
