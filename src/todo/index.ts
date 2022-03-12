@@ -139,7 +139,7 @@ const Todo = functions(({
 	], {
 		length : _.filter(global.tasks, ({
 			item	
-		}) => result(eq(item.list, list))).length
+		}) => result(and(eq(item.list, list), not(item.isComplete)))).length
 	}) as unknown as string,
 	getList : () => condition(
 		or(
