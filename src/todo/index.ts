@@ -74,6 +74,7 @@ import {
 	gt,
 	manifest,
 	alt,
+	id,
 } from "polygraphic";
 
 // THEME : https://www.materialpalette.com/blue/deep-purple
@@ -357,7 +358,9 @@ const ListScreen = screen<TodoState>(column(MATCH, MATCH, [
 		shadow(true),
 		padding(8),
 		background(PRIMARY),
-		select(MATCH, WRAP, [
+		select(0, WRAP, [
+			grow(true),
+			id("global_list_picker"),
 			bind(({ global }) => global.list),
 			observe(({
 				event,
@@ -429,6 +432,7 @@ const ListScreen = screen<TodoState>(column(MATCH, MATCH, [
 		scrollable(MATCH, MATCH, [
 			background(LIGHT_PRIMARY),
 			column(MATCH, WRAP, [
+				id("task_list"),
 				padding({ bottom : 56 + 32 }),
 				observe(({
 					global,
@@ -508,8 +512,11 @@ const ListScreen = screen<TodoState>(column(MATCH, MATCH, [
 		])
 	]),
 	row(MATCH, WRAP, [
+		background("white"),
 		padding(8),
-		input(MATCH, WRAP, [
+		input(0, WRAP, [
+			color("black"),
+			grow(true),
 			padding(8),
 			placeholder("Enter a task here..."),
 			bind(({ global }) => global.input.task),
@@ -633,7 +640,8 @@ const TaskScreen = screen<TodoState>(column(MATCH, MATCH, [
 				src(BackWhite)
 			])
 		]),
-		text(MATCH, WRAP, [
+		text(0, WRAP, [
+			grow(true),
 			"Task",
 			color("white"),
 			size(24),
@@ -728,7 +736,7 @@ const TaskScreen = screen<TodoState>(column(MATCH, MATCH, [
 			crossAxisAlignment("end"),
 			feature({
 				name : "picker.date", 
-				component : text(WRAP, 0, [
+				component : text(0, WRAP, [
 					grow(true),
 					padding(8),
 					observe(({
@@ -776,6 +784,7 @@ const TaskScreen = screen<TodoState>(column(MATCH, MATCH, [
 			color(PRIMARY),
 		]),
 		select(MATCH, WRAP, [
+			id("task_list_picker"),
 			padding(8),
 			bind(({ global }) => global.task.list),
 			observe(({
@@ -829,7 +838,7 @@ const App = stack<TodoState, TodoState>(MATCH, MATCH, [
 			add_list : AddListModal,
 			delete_list : DeleteListModal
 		},
-		onBack : () => result(true)
+		onBack : () => block([])
 	}),
 	toaster()
 ]);
