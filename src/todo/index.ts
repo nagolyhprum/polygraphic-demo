@@ -359,6 +359,7 @@ const ListScreen = screen<TodoState>(column(MATCH, MATCH, [
 		padding(8),
 		background(PRIMARY),
 		select(0, WRAP, [
+			size(24),
 			grow(true),
 			id("global_list_picker"),
 			bind(({ global }) => global.list),
@@ -784,6 +785,8 @@ const TaskScreen = screen<TodoState>(column(MATCH, MATCH, [
 			color(PRIMARY),
 		]),
 		select(MATCH, WRAP, [
+			color("black"),
+			size(16),
 			id("task_list_picker"),
 			padding(8),
 			bind(({ global }) => global.task.list),
