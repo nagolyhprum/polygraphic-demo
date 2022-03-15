@@ -20,7 +20,7 @@
   "homepage": "https://github.com/nagolyhprum/polygraphic-demo#readme",
   "dependencies": {
     "express": "^4.17.3",
-    "polygraphic": "^0.55.0",
-    "polygraphic-web": "^0.5.0"
+    "polygraphic": "^0.55.1",
+    "polygraphic-web": "^0.5.1"
   }
 }
