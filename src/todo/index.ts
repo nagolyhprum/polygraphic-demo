@@ -397,6 +397,7 @@ const ListScreen = screen<TodoState>(column(MATCH, MATCH, [
 			}),
 		]),
 		button(40, 40, [
+			round(20),
 			margin({
 				left : 8
 			}),
@@ -415,6 +416,7 @@ const ListScreen = screen<TodoState>(column(MATCH, MATCH, [
 			])
 		]),
 		button(40, 40, [
+			round(20),
 			margin({
 				left : 8
 			}),
@@ -526,6 +528,7 @@ const ListScreen = screen<TodoState>(column(MATCH, MATCH, [
 		feature({
 			name : "speech.listen", 
 			component : button(40, 40, [
+				round(20),
 				margin({
 					left : 8
 				}),
@@ -558,6 +561,7 @@ const ListScreen = screen<TodoState>(column(MATCH, MATCH, [
 			fallback: props([])
 		}),		
 		button(40, 40, [
+			round(20),
 			margin({
 				left : 8
 			}),
@@ -575,6 +579,7 @@ const ListScreen = screen<TodoState>(column(MATCH, MATCH, [
 			]),
 		]),
 		button(40, 40, [
+			round(20),
 			margin({
 				left : 8
 			}),
@@ -631,6 +636,7 @@ const TaskScreen = screen<TodoState>(column(MATCH, MATCH, [
 		background(PRIMARY),
 		crossAxisAlignment("center"),
 		button(40, 40, [
+			round(20),
 			margin({
 				right : 8
 			}),
@@ -648,6 +654,7 @@ const TaskScreen = screen<TodoState>(column(MATCH, MATCH, [
 			size(24),
 		]),
 		button(40, 40, [
+			round(20),
 			observe(({
 				global,
 				event,
@@ -674,6 +681,7 @@ const TaskScreen = screen<TodoState>(column(MATCH, MATCH, [
 			])
 		]),
 		button(40, 40, [
+			round(20),
 			onClick(({
 				global,
 				_
