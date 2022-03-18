@@ -75,6 +75,9 @@ import {
 	manifest,
 	alt,
 	id,
+	EventConfig,
+	ProgrammingLanguage,
+	ComponentFromConfig,
 } from "polygraphic";
 
 // THEME : https://www.materialpalette.com/blue/deep-purple
@@ -123,7 +126,7 @@ const Todo = functions(({
 	Date : ProgrammingDate
 	Math : Math
 }) => ({
-	generateId : () => result(add(Date.now().toString(16), "_", Math.random().toString(16).slice(2))) as unknown as string,
+	generateId : () => result(add(Date.now().toString(16), "_", _.slice(Math.random().toString(16), 2))) as unknown as string,
 	getListSize : ({
 		list
 	} : {
@@ -211,18 +214,21 @@ const Todo = functions(({
 	)
 }));
 
-const buttonStyle = <Local>(name : "primary" | "secondary") => props<TodoState, Local>([
-	name === "primary" ? props([
-		color("white"),
-		background("purple"),
-		shadow(true)
-	]) : props([
-		color("black"),
-		background("white")
-	]),
+const StyledButton = <Local>(props : {
+	name : "primary" | "secondary"
+	onClick : (event : EventConfig<TodoState, Local, null>) => ProgrammingLanguage
+	text : string
+}) => button<TodoState, Local>(WRAP, WRAP, [
 	padding(16),
 	round(30),
 	size(14),
+	shadow(true),
+	props.name === "primary" ? background("purple") : background("white"),
+	onClick(props.onClick),
+	text(WRAP, WRAP, [
+		props.name === "primary" ? color("white") :color("black"),
+		props.text,
+	]),
 ]);
 
 const AddListModal = modal<TodoState>(column(MATCH, MATCH, [
@@ -252,16 +258,16 @@ const AddListModal = modal<TodoState>(column(MATCH, MATCH, [
 			top : 8
 		}),
 		mainAxisAlignment("end"),
-		button(WRAP, WRAP, [
-			buttonStyle("secondary"),
-			"CANCEL",
-			onClick(navigation.popRoute)
-		]),
-		button(WRAP, WRAP, [
-			buttonStyle("primary"),
-			"CREATE",
-			onClick(Todo.createList)		
-		])
+		StyledButton({
+			name : "secondary",
+			text : "CANCEL",
+			onClick : navigation.popRoute
+		}),
+		StyledButton({
+			name : "primary",
+			text : "CREATE",
+			onClick : Todo.createList
+		}),
 	])
 ]));
 
@@ -615,16 +621,16 @@ const DeleteListModal = modal<TodoState>(column(MATCH, WRAP, [
 			top : 8
 		}),
 		mainAxisAlignment("end"),
-		button(WRAP, WRAP, [
-			buttonStyle("secondary"),
-			"CANCEL",
-			onClick(navigation.popRoute)
-		]),
-		button(WRAP, WRAP, [
-			buttonStyle("primary"),
-			"DELETE",
-			onClick(Todo.deleteList)		
-		])
+		StyledButton({
+			name : "secondary",
+			text : "CANCEL",
+			onClick : navigation.popRoute
+		}),
+		StyledButton({
+			name : "primary",
+			text : "DELETE",
+			onClick : Todo.deleteList
+		}),
 	])
 ]));
 
@@ -746,6 +752,17 @@ const TaskScreen = screen<TodoState>(column(MATCH, MATCH, [
 			feature({
 				name : "picker.date", 
 				component : text(0, WRAP, [
+					onClick(({
+						picker,
+						global
+					}) => picker.date({
+						ok : ({
+							value
+						}) => set(
+							global.task.date,
+							value
+						)
+					})),
 					grow(true),
 					padding(8),
 					observe(({
@@ -827,12 +844,20 @@ const TaskScreen = screen<TodoState>(column(MATCH, MATCH, [
 
 const App = stack<TodoState, TodoState>(MATCH, MATCH, [
 	manifest({
+		package : {
+			android : "com.polygraphic",
+			ios : ""
+		},
+		version : {
+			name : "1.0",
+			code : 1
+		},
 		background_color : PRIMARY,
 		description : "An app to help you get stuff done",
 		display : "standalone",
 		icons : {
 			src : CheckWhite,
-			percent : 1
+			percent : .5
 		},
 		name : "Todo",
 		short_name : "Todo",
