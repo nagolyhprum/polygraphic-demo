@@ -78,6 +78,7 @@ import {
 	EventConfig,
 	ProgrammingLanguage,
 	ComponentFromConfig,
+	lt,
 } from "polygraphic";
 
 // THEME : https://www.materialpalette.com/blue/deep-purple
@@ -321,12 +322,22 @@ const TaskItem = stack<TodoState, Task>(MATCH, WRAP, [
 					observe(({
 						local,
 						event,
-						moment
+						moment,
+						Date
 					}) => condition(
 						not(eq(local.date, -1)), 
 						block([
 							set(event.visible, true),
-							set(event.text, moment(local.date).format("ddd, MMM D, YYYY"))
+							set(event.text, moment(local.date).format("ddd, MMM D, YYYY")),
+							condition(
+								or(
+									moment(local.date).isSame(Date.now(), "day"), 
+									lt(local.date, Date.now())
+								), 
+								set(event.color, PRIMARY)
+							).otherwise(
+								set(event.color, "red")
+							)
 						])
 					).otherwise(
 						set(event.visible, false)
@@ -364,6 +375,7 @@ const ListScreen = screen<TodoState>(column(MATCH, MATCH, [
 		shadow(true),
 		padding(8),
 		background(PRIMARY),
+		crossAxisAlignment("center"),
 		select(0, WRAP, [
 			size(24),
 			grow(true),
