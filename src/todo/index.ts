@@ -219,7 +219,11 @@ const StyledButton = <Local>(props : {
 	name : "primary" | "secondary"
 	onClick : (event : EventConfig<TodoState, Local, null>) => ProgrammingLanguage
 	text : string
+	margin?: number
 }) => button<TodoState, Local>(WRAP, WRAP, [
+	margin({
+		left : props.margin || 0
+	}),
 	padding(16),
 	round(30),
 	size(14),
@@ -267,7 +271,8 @@ const AddListModal = modal<TodoState>(column(MATCH, MATCH, [
 		StyledButton({
 			name : "primary",
 			text : "CREATE",
-			onClick : Todo.createList
+			onClick : Todo.createList,
+			margin : 8
 		}),
 	])
 ]));
@@ -331,8 +336,8 @@ const TaskItem = stack<TodoState, Task>(MATCH, WRAP, [
 							set(event.text, moment(local.date).format("ddd, MMM D, YYYY")),
 							condition(
 								or(
-									moment(local.date).isSame(Date.now(), "day"), 
-									lt(local.date, Date.now())
+									gt(local.date, Date.now()),
+									moment(local.date).isSame(Date.now(), "day")
 								), 
 								set(event.color, PRIMARY)
 							).otherwise(
@@ -641,7 +646,8 @@ const DeleteListModal = modal<TodoState>(column(MATCH, WRAP, [
 		StyledButton({
 			name : "primary",
 			text : "DELETE",
-			onClick : Todo.deleteList
+			onClick : Todo.deleteList,
+			margin : 8
 		}),
 	])
 ]));
@@ -869,7 +875,7 @@ const App = stack<TodoState, TodoState>(MATCH, MATCH, [
 		display : "standalone",
 		icons : {
 			src : CheckWhite,
-			percent : .5
+			percent : .6
 		},
 		name : "Todo",
 		short_name : "Todo",
