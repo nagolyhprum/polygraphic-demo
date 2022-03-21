@@ -897,65 +897,63 @@ const App = stack<TodoState, TodoState>(MATCH, MATCH, [
 	toaster()
 ]);
 
-const now = Date.now();
-
 const MILLISECOND = 1;
 const SECOND = 1000 * MILLISECOND;
 const MINUTE = 60 * SECOND;
 const HOUR = 60 * MINUTE;
 const DAY = 24 * HOUR;
 
-const state : TodoState = {
-	list : "all",
-	input : {
-		list : "",
-		task : ""
-	},
-	task : {
-		id: "",
-		adapter : "task",
-		title : "",
-		date : -1,
-		isComplete : false,
-		list : ""
-	},
-	tasks : [{
-		id : "delete_this_task",
-		adapter : "task",
-		title : "Delete this task.",
-		date : now,
-		isComplete : false,
-		list : ""
-	}, {
-		id : "rate_the_app",
-		adapter : "task",
-		title : "Rate the **Todo** app.",
-		date : now + DAY,
-		isComplete : false,
-		list : "todo"
-	}, {
-		id : "create_a_task",
-		adapter : "task",
-		title : "Create a task.",
-		date : now,
-		isComplete : false,
-		list : "todo"	
-	}, {
-		id : "get_todo_app",
-		adapter : "task",
-		title : "Get the **Todo** app.",
-		date : now,
-		isComplete : true,
-		list : "todo"	
-	}],
-	lists : [{
-		id : "todo",
-		title : "Todo",
-		adapter : "option",			
-	}]
-};
-
 export default {
 	App,
-	state
+	state : ({
+		Date
+	}) => ({
+		list : "all",
+		input : {
+			list : "",
+			task : ""
+		},
+		task : {
+			id: "",
+			adapter : "task",
+			title : "",
+			date : -1,
+			isComplete : false,
+			list : ""
+		},
+		tasks : [{
+			id : "delete_this_task",
+			adapter : "task",
+			title : "Delete this task.",
+			date : Date.now(),
+			isComplete : false,
+			list : ""
+		}, {
+			id : "rate_the_app",
+			adapter : "task",
+			title : "Rate the **Todo** app.",
+			date : add(Date.now(), DAY),
+			isComplete : false,
+			list : "todo"
+		}, {
+			id : "create_a_task",
+			adapter : "task",
+			title : "Create a task.",
+			date : Date.now(),
+			isComplete : false,
+			list : "todo"	
+		}, {
+			id : "get_todo_app",
+			adapter : "task",
+			title : "Get the **Todo** app.",
+			date : Date.now(),
+			isComplete : true,
+			list : "todo"	
+		}],
+		lists : [{
+			id : "todo",
+			title : "Todo",
+			adapter : "option",			
+		}]
+	})
 };
