@@ -867,8 +867,8 @@ const App = stack<TodoState, TodoState>(MATCH, MATCH, [
 			ios : ""
 		},
 		version : {
-			name : "1.0",
-			code : 1
+			name : "2.0.1",
+			code : 4
 		},
 		background_color : PRIMARY,
 		description : "An app to help you get stuff done",
