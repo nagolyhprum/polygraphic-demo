@@ -299,6 +299,18 @@ const TaskItem = stack<TodoState, Task>(MATCH, WRAP, [
 				margin({
 					right : 8
 				}),
+				onChange(({
+					event,
+					local,
+					_,
+					global
+				}) => declare(({
+					index
+				}) => [
+					set(symbol(global.tasks, index).isComplete, event)
+				], {
+					index : _.indexOf(global.tasks, ({ item }) => result(eq(item.id, local.id)))
+				})),
 				observe(({
 					event,
 					local
@@ -306,13 +318,10 @@ const TaskItem = stack<TodoState, Task>(MATCH, WRAP, [
 					event.value,
 					local.isComplete
 				)),
-				onChange(({
-					local,
-					event
-				}) => set(local.isComplete, event))
 			]),
 			column(MATCH, WRAP, [
 				text(WRAP, WRAP, [
+					id("task_title"),
 					color(PRIMARY_TEXT),
 					observe(({
 						local,
@@ -382,6 +391,7 @@ const ListScreen = screen<TodoState>(column(MATCH, MATCH, [
 		background(PRIMARY),
 		crossAxisAlignment("center"),
 		select(0, WRAP, [
+			placeholder("Select a list"),
 			size(24),
 			grow(true),
 			id("global_list_picker"),
@@ -538,6 +548,7 @@ const ListScreen = screen<TodoState>(column(MATCH, MATCH, [
 		])
 	]),
 	row(MATCH, WRAP, [
+		crossAxisAlignment("center"),
 		background("white"),
 		padding(8),
 		input(0, WRAP, [
@@ -828,6 +839,7 @@ const TaskScreen = screen<TodoState>(column(MATCH, MATCH, [
 			color(PRIMARY),
 		]),
 		select(MATCH, WRAP, [
+			placeholder("Select a list"),
 			color("black"),
 			size(16),
 			id("task_list_picker"),
