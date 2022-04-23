@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "polygraphic-web pwa src/todo/index.ts -o dist/todo",
     "start": "node src/index.js",
-    "android": "polygraphic-android build src/todo/index.ts -o dist/todo-android"
+    "android": "polygraphic-android build src/todo/index.ts -o dist/todo-android",
+    "ios": "polygraphic-ios build src/todo/index.ts -o dist/todo-ios"
   },
   "repository": {
     "type": "git",
@@ -21,8 +22,12 @@
   "homepage": "https://github.com/nagolyhprum/polygraphic-demo#readme",
   "dependencies": {
     "express": "^4.17.3",
-    "polygraphic": "^0.76.1",
+    "polygraphic": "^0.79.0",
     "polygraphic-android": "^0.4.0",
+    "polygraphic-ios": "^0.2.1",
     "polygraphic-web": "^0.9.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.3"
   }
 }

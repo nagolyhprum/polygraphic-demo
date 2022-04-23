@@ -79,6 +79,7 @@ import {
 	ProgrammingLanguage,
 	ComponentFromConfig,
 	lt,
+	helpers,
 } from "polygraphic";
 
 // THEME : https://www.materialpalette.com/blue/deep-purple
@@ -127,7 +128,6 @@ const Todo = functions(({
 	Date : ProgrammingDate
 	Math : Math
 }) => ({
-	generateId : () => result(add(Date.now().toString(16), "_", _.slice(Math.random().toString(16), 2))) as unknown as string,
 	getListSize : ({
 		list
 	} : {
@@ -168,7 +168,7 @@ const Todo = functions(({
 			}])),
 			navigation.popRoute()
 		], {
-			id : Todo.generateId()
+			id : helpers.generateId()
 		})
 	),
 	deleteList : () => block([
@@ -203,7 +203,7 @@ const Todo = functions(({
 	createTask : () => condition(not(eq(global.input.task, "")), 
 		block([
 			set(global.tasks, _.concat(global.tasks, [{
-				id : Todo.generateId(),
+				id : helpers.generateId(),
 				adapter : "task",
 				title : global.input.task,
 				date : -1,
@@ -585,7 +585,7 @@ const ListScreen = screen<TodoState>(column(MATCH, MATCH, [
 					}) => set(global.tasks, _.concat(global.tasks, [{
 						adapter : "task",
 						date : -1,
-						id : Todo.generateId(),
+						id : helpers.generateId(),
 						isComplete : false,
 						list : Todo.getList(),
 						title : symbol(symbol(results, 0), 0).transcript,							
@@ -728,7 +728,7 @@ const TaskScreen = screen<TodoState>(column(MATCH, MATCH, [
 					}) => [
 						condition(
 							eq(id, ""), 
-							set(id, Todo.generateId())
+							set(id, helpers.generateId())
 						),
 						set(global.tasks, _.upsert(global.tasks, _.assign({}, global.task, {
 							id
@@ -876,7 +876,7 @@ const App = stack<TodoState, TodoState>(MATCH, MATCH, [
 	manifest({
 		package : {
 			android : "com.polygraphic",
-			ios : ""
+			ios : "com.polygraphic.Polygraphic"
 		},
 		version : {
 			name : "2.0.1",
